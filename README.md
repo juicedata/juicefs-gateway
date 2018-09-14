@@ -1,22 +1,18 @@
 # JuiceFS Gateway
 
+start container
+
 ```
-docker run --detach \
-    -p 111:111 \
-    -p 111:111/udp \
-    -p 662:662 \
-    -p 2049:2049 \
-    -p 137:137/udp \
-    -p 138:138/udp \
-    -p 139:139 \
-    -p 445:445 \
-    --init \
-    --privileged \
-    --cap-add SYS_ADMIN \
-    --device /dev/fuse \
-    --env JFS_VOL=volume-name \
-    --env JFS_TOKEN=token-of-juicefs-volume \
-    --env JFS_ACCESS_KEY=access-key \
-    --env JFS_SECRET_KEY=secret-key \
-    juicedata/juicefs-gateway:latest
+export JFS_VOL="name of JuiceFS volume"
+export JFS_TOKEN="token of JuiceFS volume"
+export JFS_ACCESS_KEY="access key"
+export JFS_SECRET_KEY="secret key"
+
+docker run -d -p 2049:2049 -p 137:137/udp -p 138:138/udp -p 139:139 -p 445:445 --init --privileged --cap-add SYS_ADMIN --device /dev/fuse -e JFS_VOL="${JFS_VOL}" -e JFS_TOKEN="${JFS_TOKEN}" -e JFS_ACCESS_KEY="${JFS_ACCESS_KEY}" -e JFS_SECRET_KEY="${JFS_SECRET_KEY}" juicedata/juicefs-gateway:latest
+```
+
+smbclient
+
+```
+smbclient //127.0.0.1/share
 ```
