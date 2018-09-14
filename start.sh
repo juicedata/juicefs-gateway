@@ -41,4 +41,6 @@ EOF
 /usr/bin/ganesha.nfsd -N NIV_EVENT
 smbd
 
+touch /mnt/juicefs/.juicefs-gateway
+ls /mnt/juicefs
 wait "${PID}"
